@@ -4,7 +4,7 @@ pipeline{
         DOCKER_FILE = "Dockerfile"
         IMAGE = "razzy10/nextjs-app-image"
         TAG = "0.0"
-        VERSION = ${env.Build_ID}
+        VERSION = "${env.Build_ID}"
     }
     stages{
         stage("Build Image"){
