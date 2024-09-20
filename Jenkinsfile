@@ -2,6 +2,9 @@ pipeline{
     agent any
     environment{
         DOCKER_FILE = "Dockerfile"
+        IMAGE = "razzy10/nextjs-app-image"
+        TAG = "0.0"
+        VERSION = ${env.Build_ID}
     }
     stages{
         stage("Build Image"){
@@ -9,6 +12,7 @@ pipeline{
                 script{
                     echo "Build nextjs image."
                     sh 'docker build -t nextjs-image .'
+                    echo "build number: ${VERSION}"
                 }
             }
         }
