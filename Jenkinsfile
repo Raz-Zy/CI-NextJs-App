@@ -11,7 +11,7 @@ pipeline{
             steps{
                 script{
                     echo "Build nextjs image."
-                    sh 'docker build -t nextjs-image .'
+                    sh "docker build -t ${IMAGE}:${TAG} ."
                     echo "build number: ${VERSION}"
                 }
             }
