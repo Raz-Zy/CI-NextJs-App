@@ -18,9 +18,11 @@ pipeline{
         stage("Push image to registry (Docker Hub)"){
             steps{
                 script{
-                    echo "Login Docker Hub"
-                    sh "docker login -u razzy10 -p "
-                    sh "docker push ${IMAGE}:${TAG}.${VERSION}"
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-token', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                        echo "Login Docker Hub"
+                        sh "docker login -u $USERNAME -p $PASSWORD"
+                        sh "docker push ${IMAGE}:${TAG}.${VERSION}"
+                    }
                 }
             }
         }
