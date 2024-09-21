@@ -39,7 +39,7 @@ pipeline{
                         sh "git commit -am 'Update image tag'"
                         echo "user name: $USERNAME"
                         echo "user password: $PASSWORD"
-                        sh "git push https://${USERNAME}:${PASSWORD}github.com/Raz-Zy/CD-NextJS-Helm"
+                        sh "git push https://${USERNAME}:${PASSWORD}@github.com/Raz-Zy/CD-NextJS-Helm"
                     }
                 }
             }
