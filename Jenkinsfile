@@ -16,6 +16,9 @@ pipeline{
             }
         }
         stage("Push image to registry (Docker Hub)"){
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }  // Only proceed if the build was successful
+            }
             steps{
                 script{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-token', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
