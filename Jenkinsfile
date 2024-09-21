@@ -37,7 +37,9 @@ pipeline{
                         sh "git config --global user.email 'tandara120403@gmail.com'"
                         sh "git config --global user.name 'Tan Dara'"
                         sh "git commit -am 'Update image tag'"
-                        sh "git push origin master"
+                        echo "user name: $USERNAME"
+                        echo "user password: $PASSWORD"
+                        sh "git push https://${USERNAME}:${PASSWORD}github.com/Raz-Zy/CD-NextJS-Helm"
                     }
                 }
             }
