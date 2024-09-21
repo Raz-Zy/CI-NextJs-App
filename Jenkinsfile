@@ -31,7 +31,7 @@ pipeline{
                 script{
                     git credentialsId: 'git-token', url: 'https://github.com/Raz-Zy/CD-NextJS-Helm.git'
                     echo "Update Image Tag"
-                    sh "sed -i 's/tag: 0.0.9/tag: ${TAG}.${VERSION}/ values.yaml'"
+                    sh 'sed -i "s/tag:.*/tag: ${TAG}.${VERSION}/" values.yaml'
                     echo "Git Config for pushing latest update."
                     sh "git config --global user.email 'tandara120403@gmail.com'"
                     sh "git config --global user.name 'Tan Dara'"
