@@ -29,14 +29,16 @@ pipeline{
         stage("Update to image in the kubernetes manifest file to latest images"){
             steps{
                 script{
-                    git credentialsId: 'git-token', url: 'https://github.com/Raz-Zy/CD-NextJS-Helm.git'
-                    echo "Update Image Tag"
-                    sh 'sed -i "s/tag:.*/tag: ${TAG}.${VERSION}/" values.yaml'
-                    echo "Git Config for pushing latest update."
-                    sh "git config --global user.email 'tandara120403@gmail.com'"
-                    sh "git config --global user.name 'Tan Dara'"
-                    sh "git commit -am 'Update image tag'"
-                    sh "git push origin master"
+                    withCredentials([usernamePassword(credentialsId: 'git-token', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                        git credentialsId: 'git-token', url: 'https://github.com/Raz-Zy/CD-NextJS-Helm.git'
+                        echo "Update Image Tag"
+                        sh 'sed -i "s/tag:.*/tag: ${TAG}.${VERSION}/" values.yaml'
+                        echo "Git Config for pushing latest update."
+                        sh "git config --global user.email 'tandara120403@gmail.com'"
+                        sh "git config --global user.name 'Tan Dara'"
+                        sh "git commit -am 'Update image tag'"
+                        sh "git push origin master"
+                    }
                 }
             }
         }
